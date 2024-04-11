@@ -1,3 +1,4 @@
+import 'package:capstone/user/view/treedisplay.dart';
 import 'package:capstone/view/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:capstone/view/root.dart';
@@ -7,7 +8,11 @@ void main() {
   runApp(
       MaterialApp(
         theme: ThemeData(
-            scaffoldBackgroundColor: backgroundColor,
+          appBarTheme: AppBarTheme(
+            backgroundColor: backgroundColor,
+
+          ),
+            scaffoldBackgroundColor: Colors.white,
             sliderTheme: SliderThemeData(
                 thumbColor: primaryColor,
                 activeTickMarkColor: primaryColor,
@@ -19,7 +24,7 @@ void main() {
               backgroundColor: backgroundColor,
             )
         ),
-        home : Rootscreen(),
+        home : Tree(),
       )
   );
 }

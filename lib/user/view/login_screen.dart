@@ -20,9 +20,9 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
 
-    final dio = Dio();
-    final emulatorIP = '10.0.2.2:3000';
-    final ip = emulatorIP;
+    // final dio = Dio();
+    // final emulatorIP = '10.0.2.2:3000';
+    // final ip = emulatorIP;
     return DefaultLayout(
       child: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 16.0,),
                 _subTitle(),
                 Image.asset(
-                  'asset/img/misc/logo.png',
+                  'asset/img/character.png',
                   width: MediaQuery.of(context).size.width / 3 * 2,
                 ),
                 CustomTextFormField(
@@ -68,17 +68,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       String token = stringToBase64.encode(rawString); //base64로 인코딩
 
-                      final resp = await dio.post('http://$ip/auth/login',options: Options(
-                          headers: {
-                            'authorization' : 'Basic $token',
-                          }
-                      )
-                      );
-                      final refreshToken = resp.data['refreshToken'];
-                      final accessToken = resp.data['accessToken'];
+                      // final resp = await dio.post('http://$ip/auth/login',options: Options(
+                      //     headers: {
+                      //       'authorization' : 'Basic $token',
+                      //     }
+                      // )
+                      // );
+                      // final refreshToken = resp.data['refreshToken'];
+                      // final accessToken = resp.data['accessToken'];
 
-                      await storage.write(key:REFRESH_TOKEN_KEY, value:refreshToken);
-                      await storage.write(key:ACCESS_TOKEN_KEY, value:accessToken);
+                      await storage.write(key:REFRESH_TOKEN_KEY, value:token);
+                      await storage.write(key:ACCESS_TOKEN_KEY, value:token);
 
                       Navigator.of(context).push(
                           MaterialPageRoute(builder: (_) => Rootscreen())
@@ -90,14 +90,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Text('로그인')),
                 TextButton(
                     onPressed: () async {
-                      final refreshToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAY29kZWZhY3RvcnkuYWkiLCJzdWIiOiJmNTViMzJkMi00ZDY4LTRjMWUtYTNjYS1kYTlkN2QwZDkyZTUiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTcwNjI1NzUyOCwiZXhwIjoxNzA2MzQzOTI4fQ.ZEpBqXXQCtlTsdgJ-iAbVxgRrtE8KE5LyGbN1y96uKY';
-                      final resp = await dio.post('http://$ip/auth/token',options: Options(
-                          headers: {
-                            'authorization' : 'Bearer $refreshToken',
-                          }
-                      )
-                      );
-                      print(resp.data);
+                      // final refreshToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAY29kZWZhY3RvcnkuYWkiLCJzdWIiOiJmNTViMzJkMi00ZDY4LTRjMWUtYTNjYS1kYTlkN2QwZDkyZTUiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTcwNjI1NzUyOCwiZXhwIjoxNzA2MzQzOTI4fQ.ZEpBqXXQCtlTsdgJ-iAbVxgRrtE8KE5LyGbN1y96uKY';
+                      // final resp = await dio.post('http://$ip/auth/token',options: Options(
+                      //     headers: {
+                      //       'authorization' : 'Bearer $refreshToken',
+                      //     }
+                      // )
+                      // );
+                      // print(resp.data);
                     },
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.black,

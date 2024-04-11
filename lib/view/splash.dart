@@ -47,14 +47,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Widget build(BuildContext context) {
     return DefaultLayout(
-      backgroundColor: primaryColor,
+      backgroundColor: backgroundColor,
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'asset/img/logo/logo.png',
+              'asset/img/character.png',
               width: MediaQuery.of(context).size.width / 2,
             ),
             const SizedBox(

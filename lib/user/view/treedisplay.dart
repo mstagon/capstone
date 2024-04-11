@@ -1,4 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:neon_widgets/neon_widgets.dart';
+
+import '../../fire.dart';
 
 class Tree extends StatefulWidget {
   const Tree({super.key});
@@ -11,16 +16,18 @@ class _TreeState extends State<Tree> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _offsetAnimation;
 
+  get random => null;
+
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2),
+      duration: Duration(seconds: 4),
     );
     _offsetAnimation = Tween<Offset>(
       begin: Offset.zero,
-      end: Offset(1.5, 0.0),
+      end: Offset(0, 0.05),
     ).animate(CurvedAnimation(
       parent: _controller,
       curve: Curves.easeInOut,
@@ -41,23 +48,28 @@ class _TreeState extends State<Tree> with SingleTickerProviderStateMixin {
       children: [
         Positioned.fill(
           child: Image.asset(
-            'asset/img/background.jpeg',
+            'asset/img/background.png',
             fit: BoxFit.cover,
           ),
         ),
-        Positioned(
-          left: 50.0,
-          top: 100.0,
-          child: SlideTransition(
-            position: _offsetAnimation,
-            child: Image.asset(
-              'asset/img/character.jpeg',
-              width: 100.0,
-              height: 100.0,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            SlideTransition(
+              position: _offsetAnimation,
+              child: Image.asset(
+                'asset/img/character.png',
+                width: 500.0,
+                height: 500.0,
+              ),
             ),
-          ),
+            SizedBox(height: 70,)
+          ],
         ),
+        FireflyAnimation(),
+
       ],
     );
   }
+
 }

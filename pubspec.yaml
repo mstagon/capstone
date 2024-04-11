@@ -38,6 +38,7 @@ dependencies:
   nfc_manager: any
   dio: any
   flutter_secure_storage: any
+  neon_widgets: any
 
 dev_dependencies:
   flutter_test:
