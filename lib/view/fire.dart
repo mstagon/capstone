@@ -12,12 +12,19 @@ class FireflyAnimation extends StatefulWidget {
 class _FireflyAnimationState extends State<FireflyAnimation> {
   List<Firefly> _fireflies = [];
   final _random = Random();
+  late Timer _timer;
 
   @override
   void initState() {
     super.initState();
     _initializeFireflies();
     _startAnimation();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel(); // 타이머 해제
+    super.dispose();
   }
 
   void _initializeFireflies() {
@@ -29,7 +36,7 @@ class _FireflyAnimationState extends State<FireflyAnimation> {
   }
 
   void _startAnimation() {
-    Timer.periodic(Duration(milliseconds: 70), (timer) {
+    _timer = Timer.periodic(Duration(milliseconds: 70), (timer) {
       _updateFireflies();
     });
   }
@@ -50,7 +57,6 @@ class _FireflyAnimationState extends State<FireflyAnimation> {
           Positioned(
             left: firefly.dx * MediaQuery.of(context).size.width,
             top: firefly.dy * MediaQuery.of(context).size.height,
-
             child: NeonPoint(
               pointSize: 2,
               pointColor: Colors.yellow.shade50,
@@ -62,6 +68,7 @@ class _FireflyAnimationState extends State<FireflyAnimation> {
     );
   }
 }
+
 
 class Firefly {
   late double dx;

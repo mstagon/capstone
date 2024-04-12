@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:capstone/splash/introduction_animation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:capstone/const/color.dart';
 import 'package:capstone/const/data.dart';
@@ -33,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (refreshToken == null || accessToken == null) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (_) => LoginScreen(),
+            builder: (_) => IntroductionAnimationScreen(),
           ),
               (route) => false);
     } else {
