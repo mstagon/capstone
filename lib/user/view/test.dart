@@ -1,6 +1,8 @@
 import 'package:capstone/component/top_button.dart';
+import 'package:capstone/component/top_button_main.dart';
 import 'package:capstone/const/color.dart';
 import 'package:capstone/provider/timer.dart';
+import 'package:capstone/view/shop.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -103,7 +105,7 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
                     ),
                   ],
                 ),
-                Topbutton(),
+                Topbutton_main(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -113,8 +115,14 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
                         SizedBox(
                           height: 100,
                         ),
-                        Container(
+                        InkWell(
+                          onTap : (){
+                            Navigator.of(context).push(
+                                MaterialPageRoute(builder: (_) => Shop())
+                            );
+                          },
                           child: Image.asset(
+                            height: 50,
                             "asset/image/icon/shop.png",
                             fit: BoxFit.contain,
                           ),
@@ -124,12 +132,14 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
                         ),
                         Container(
                           child: Image.asset(
+                            height: 50,
                             "asset/image/icon/light.png",
                             fit: BoxFit.contain,
                           ),
                         ),
                       ],
                     ),
+                    SizedBox(width: 15,),
                   ],
                 ),
                 isVisible ? FireflyAnimation() : SizedBox(),

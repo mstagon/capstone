@@ -6,12 +6,12 @@ import 'package:capstone/provider/money.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-class Topbutton extends StatefulWidget {
+class Topbutton_main extends StatefulWidget {
   @override
-  State<Topbutton> createState() => _TopbuttonState();
+  State<Topbutton_main> createState() => _Topbutton_mainState();
 }
 
-class _TopbuttonState extends State<Topbutton> {
+class _Topbutton_mainState extends State<Topbutton_main> {
   @override
   void initState() {
     super.initState();
@@ -27,14 +27,8 @@ class _TopbuttonState extends State<Topbutton> {
         child: Padding(
           padding: const EdgeInsets.only(left: 8, right: 16),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context); // 뒤로가기 버튼을 눌렀을 때 이전 화면으로 이동
-                },
-                icon: Icon(Icons.arrow_back), // 뒤로가기 버튼
-              ),
               Column(
                 children: [
                   SizedBox(height: 10,),
