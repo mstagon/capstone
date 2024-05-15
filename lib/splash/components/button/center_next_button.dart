@@ -1,6 +1,8 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 
+import '../../../user/view/login_screen.dart';
+
 class CenterNextButton extends StatelessWidget {
   final AnimationController animationController;
   final VoidCallback onNextClick;
@@ -24,8 +26,8 @@ class CenterNextButton extends StatelessWidget {
         Tween<double>(begin: 0, end: 1.0).animate(CurvedAnimation(
       parent: animationController,
       curve: Interval(
-        0.6,
-        0.8,
+        0.2,
+        0.4,
         curve: Curves.fastOutSlowIn,
       ),
     ));
@@ -34,8 +36,8 @@ class CenterNextButton extends StatelessWidget {
             .animate(CurvedAnimation(
       parent: animationController,
       curve: Interval(
-        0.6,
-        0.8,
+        0.2,
+        0.4,
         curve: Curves.fastOutSlowIn,
       ),
     ));
@@ -53,7 +55,7 @@ class CenterNextButton extends StatelessWidget {
               animation: animationController,
               builder: (context, child) => AnimatedOpacity(
                 opacity: animationController.value >= 0.2 &&
-                        animationController.value <= 0.6
+                        animationController.value <= 0.4
                     ? 1
                     : 0,
                 duration: Duration(milliseconds: 480),
@@ -103,7 +105,7 @@ class CenterNextButton extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Sign Up',
+                                    '회원 가입',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
@@ -138,19 +140,37 @@ class CenterNextButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Already have an account? ',
+                    '이미 계정이 있으신가요? ',
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 14,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
-                  Text(
-                    'Login',
-                    style: TextStyle(
-                      color: Color(0xff132137),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) => LoginScreen(),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      var begin = const Offset(1.0, 0.0);
+                      var end = Offset.zero;
+                      var curve = Curves.ease;
+                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                      return SlideTransition(
+                      position: animation.drive(tween),
+                      child: child,
+                      );
+                      },
+                      transitionDuration: Duration(seconds : 1),
+                      ));
+                    },
+                    child: Text(
+                      '로그인',
+                      style: TextStyle(
+                        color: Color(0xff132137),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -164,12 +184,7 @@ class CenterNextButton extends StatelessWidget {
 
   Widget _pageView() {
     int _selectedIndex = 0;
-
-    if (animationController.value >= 0.7) {
-      _selectedIndex = 3;
-    } else if (animationController.value >= 0.5) {
-      _selectedIndex = 2;
-    } else if (animationController.value >= 0.3) {
+    if (animationController.value >= 0.3) {
       _selectedIndex = 1;
     } else if (animationController.value >= 0.1) {
       _selectedIndex = 0;
@@ -180,7 +195,7 @@ class CenterNextButton extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          for (var i = 0; i < 4; i++)
+          for (var i = 0; i < 2; i++)
             Padding(
               padding: const EdgeInsets.all(4),
               child: AnimatedContainer(

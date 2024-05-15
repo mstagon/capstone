@@ -42,7 +42,28 @@ dependencies:
   battery_plus: any
   animations: any
   provider: any
+  flutter_launcher_icons: "^0.13.1"
+  flutter_social_button: ^1.1.4+1
+  flutter_background_service: ^5.0.5
+  flutter_blue_plus : 1.4.0
 
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "asset/image/icon/lanchicon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "asset/image/icon/lanchicon.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "asset/image/icon/lanchicon.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "asset/image/icon/lanchicon.png"
 
 dev_dependencies:
   flutter_test:
@@ -68,8 +89,12 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - asset/img/
-     - asset/img/splash/
+     - asset/image/
+     - asset/image/splash/
+     - asset/image/logo/
+     - asset/image/home/
+     - asset/image/plants/
+     - asset/image/icon/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

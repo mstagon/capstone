@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:battery_plus/battery_plus.dart';
-import '../user/view/treedisplay.dart';
 
 class BatteryProvider extends ChangeNotifier {
   final Battery _battery = Battery();
@@ -18,13 +17,10 @@ class BatteryProvider extends ChangeNotifier {
           state == BatteryState.charging) {
         _isCharging = true;
         notifyListeners();
-      } else if (_previousBatteryState == BatteryState.charging &&
-          state != BatteryState.charging) {
-        _isCharging = false;
-        notifyListeners();
       }
       _previousBatteryState = state;
-    });
+    }
+    );
   }
 
 

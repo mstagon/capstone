@@ -9,7 +9,7 @@ class RelaxView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _firstHalfAnimation =
-        Tween<Offset>(begin: Offset(0, 1), end: Offset(0, 0)).animate(
+    Tween<Offset>(begin: Offset(0, 1), end: Offset(0, 0)).animate(
       CurvedAnimation(
         parent: animationController,
         curve: Interval(
@@ -20,7 +20,7 @@ class RelaxView extends StatelessWidget {
       ),
     );
     final _secondHalfAnimation =
-        Tween<Offset>(begin: Offset(0, 0), end: Offset(-1, 0)).animate(
+    Tween<Offset>(begin: Offset(0, 0), end: Offset(-1, 0)).animate(
       CurvedAnimation(
         parent: animationController,
         curve: Interval(
@@ -31,7 +31,7 @@ class RelaxView extends StatelessWidget {
       ),
     );
     final _textAnimation =
-        Tween<Offset>(begin: Offset(0, 0), end: Offset(-2, 0)).animate(
+    Tween<Offset>(begin: Offset(0, 0), end: Offset(-2, 0)).animate(
       CurvedAnimation(
         parent: animationController,
         curve: Interval(
@@ -42,7 +42,7 @@ class RelaxView extends StatelessWidget {
       ),
     );
     final _imageAnimation =
-        Tween<Offset>(begin: Offset(0, 0), end: Offset(-4, 0)).animate(
+    Tween<Offset>(begin: Offset(0, 0), end: Offset(-4, 0)).animate(
       CurvedAnimation(
         parent: animationController,
         curve: Interval(
@@ -54,7 +54,7 @@ class RelaxView extends StatelessWidget {
     );
 
     final _relaxAnimation =
-        Tween<Offset>(begin: Offset(0, -2), end: Offset(0, 0)).animate(
+    Tween<Offset>(begin: Offset(0, -2), end: Offset(0, 0)).animate(
       CurvedAnimation(
         parent: animationController,
         curve: Interval(
@@ -64,44 +64,46 @@ class RelaxView extends StatelessWidget {
         ),
       ),
     );
-    return SlideTransition(
-      position: _firstHalfAnimation,
+    return Center(
       child: SlideTransition(
-        position: _secondHalfAnimation,
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 100),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SlideTransition(
-                position: _relaxAnimation,
-                child: Text(
-                  "Relax",
-                  style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
-                ),
-              ),
-              SlideTransition(
-                position: _textAnimation,
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(left: 64, right: 64, top: 16, bottom: 16),
+        position: _firstHalfAnimation,
+        child: SlideTransition(
+          position: _secondHalfAnimation,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 100),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SlideTransition(
+                  position: _relaxAnimation,
                   child: Text(
-                    "Lorem ipsum dolor sit amet,consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore",
-                    textAlign: TextAlign.center,
+                    "휴식",
+                    style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
                   ),
                 ),
-              ),
-              SlideTransition(
-                position: _imageAnimation,
-                child: Container(
-                  constraints: BoxConstraints(maxWidth: 350, maxHeight: 250),
-                  child: Image.asset(
-                    'asset/img/splash/relax_image.png',
-                    fit: BoxFit.contain,
+                SlideTransition(
+                  position: _textAnimation,
+                  child: Padding(
+                    padding:
+                        EdgeInsets.only(left: 64, right: 64, top: 16, bottom: 16),
+                    child: Text(
+                      "핸드폰을 내려놓고, 숨을 깊게 들이쉬세요. ",
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
-              ),
-            ],
+                SlideTransition(
+                  position: _imageAnimation,
+                  child: Container(
+                    constraints: BoxConstraints(maxWidth: 350, maxHeight: 250),
+                    child: Image.asset(
+                      'asset/image/splash/relax.png',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

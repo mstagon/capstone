@@ -12,8 +12,8 @@ class WelcomeView extends StatelessWidget {
       CurvedAnimation(
         parent: animationController,
         curve: Interval(
-          0.6,
-          0.8,
+          0.2,
+          0.4,
           curve: Curves.fastOutSlowIn,
         ),
       ),
@@ -23,8 +23,8 @@ class WelcomeView extends StatelessWidget {
       CurvedAnimation(
         parent: animationController,
         curve: Interval(
-          0.8,
-          1.0,
+          0.4,
+          0.6,
           curve: Curves.fastOutSlowIn,
         ),
       ),
@@ -35,8 +35,8 @@ class WelcomeView extends StatelessWidget {
             .animate(CurvedAnimation(
       parent: animationController,
       curve: Interval(
-        0.6,
-        0.8,
+        0.2,
+        0.4,
         curve: Curves.fastOutSlowIn,
       ),
     ));
@@ -46,8 +46,8 @@ class WelcomeView extends StatelessWidget {
             .animate(CurvedAnimation(
       parent: animationController,
       curve: Interval(
-        0.6,
-        0.8,
+        0.2,
+        0.4,
         curve: Curves.fastOutSlowIn,
       ),
     ));
@@ -65,7 +65,7 @@ class WelcomeView extends StatelessWidget {
                 child: Container(
                   constraints: BoxConstraints(maxWidth: 350, maxHeight: 350),
                   child: Image.asset(
-                    'asset/img/splash/welcome.png',
+                    'asset/image/logo/logo.png',
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -73,7 +73,7 @@ class WelcomeView extends StatelessWidget {
               SlideTransition(
                 position: _welcomeFirstHalfAnimation,
                 child: Text(
-                  "Welcome",
+                  "환영합니다",
                   style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -81,7 +81,7 @@ class WelcomeView extends StatelessWidget {
                 padding:
                     EdgeInsets.only(left: 64, right: 64, top: 16, bottom: 16),
                 child: Text(
-                  "Stay organised and live stress-free with you-do app",
+                  "디지털 세계에 잠깐의 휴식을 주세요. 당신의 테라리움이 당신을 기다립니다.",
                   textAlign: TextAlign.center,
                 ),
               ),

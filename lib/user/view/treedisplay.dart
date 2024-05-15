@@ -14,7 +14,6 @@ class Tree extends StatefulWidget {
 class _TreeState extends State<Tree> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _offsetAnimation;
-  late BatteryProvider _batteryProvider;
 
   get random => null;
 
@@ -33,8 +32,6 @@ class _TreeState extends State<Tree> with SingleTickerProviderStateMixin {
       curve: Curves.easeInOut,
     ));
     _controller.repeat(reverse: true);
-    _batteryProvider = Provider.of<BatteryProvider>(context, listen: false);
-    _batteryProvider.detectCharging();
   }
 
   @override
@@ -51,13 +48,12 @@ class _TreeState extends State<Tree> with SingleTickerProviderStateMixin {
           canPop: true ,
           onPopInvoked: (bool didPop) {
             Provider.of<NFCProvider>(context, listen: false).detectNFC();
-            Provider.of<BatteryProvider>(context, listen: false).detectCharging();
           },
           child: Stack(
             children: [
               Positioned.fill(
                 child: Image.asset(
-                  'asset/img/background.png',
+                  'asset/image/background1.png',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -67,7 +63,7 @@ class _TreeState extends State<Tree> with SingleTickerProviderStateMixin {
                   SlideTransition(
                     position: _offsetAnimation,
                     child: Image.asset(
-                      'asset/img/character.png',
+                      'asset/image/character.png',
                       width: 500.0,
                       height: 500.0,
                     ),

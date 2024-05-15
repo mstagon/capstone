@@ -19,7 +19,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    checkToken();
+    Future.delayed(const Duration(seconds: 3), () {
+      checkToken();
+    });
+
     // deleteToken();
   }
 
@@ -32,17 +35,35 @@ class _SplashScreenState extends State<SplashScreen> {
     final accessToken = await storage.read(key: ACCESS_TOKEN_KEY);
 
     if (refreshToken == null || accessToken == null) {
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-            builder: (_) => IntroductionAnimationScreen(),
-          ),
-              (route) => false);
+      Navigator.push(context, PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => IntroductionAnimationScreen(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          var begin = const Offset(1.0, 0.0);
+          var end = Offset.zero;
+          var curve = Curves.ease;
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          return SlideTransition(
+            position: animation.drive(tween),
+            child: child,
+          );
+        },
+        transitionDuration: Duration(seconds : 1),
+      ));
     } else {
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-            builder: (_) => Rootscreen(),
-          ),
-              (route) => false);
+      Navigator.push(context, PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => IntroductionAnimationScreen(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          var begin = const Offset(1.0, 0.0);
+          var end = Offset.zero;
+          var curve = Curves.ease;
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          return SlideTransition(
+            position: animation.drive(tween),
+            child: child,
+          );
+        },
+        transitionDuration: Duration(seconds : 1),
+      ));
     }
   }
 
@@ -55,18 +76,19 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'asset/img/character.png',
-              width: MediaQuery.of(context).size.width / 2,
+              'asset/image/logo/logo.png',
+              width: MediaQuery.of(context).size.width ,
             ),
             const SizedBox(
               height: 16.0,
             ),
             CircularProgressIndicator(
-              color: Colors.white,
+              color: primaryColor,
             ),
           ],
         ),
       ),
     );
   }
+
 }

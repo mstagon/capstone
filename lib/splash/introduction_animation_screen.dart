@@ -1,13 +1,12 @@
-import 'package:capstone/splash/components/care_view.dart';
+import 'package:capstone/const/color.dart';
 import 'package:capstone/splash/components/button/center_next_button.dart';
-import 'package:capstone/splash/components/dmood_diary_vew.dart';
 import 'package:capstone/splash/components/brelax_view.dart';
 import 'package:capstone/splash/components/asplash_view.dart';
 import 'package:capstone/splash/components/button/top_back_skip_view.dart';
 import 'package:capstone/splash/components/welcome_view.dart';
 import 'package:capstone/user/view/login_screen.dart';
-import 'package:capstone/view/root.dart';
-import 'package:capstone/view/splash.dart';
+import 'package:capstone/user/view/test.dart';
+import 'package:capstone/view/home.dart';
 import 'package:flutter/material.dart';
 
 class IntroductionAnimationScreen extends StatefulWidget {
@@ -40,7 +39,7 @@ class _IntroductionAnimationScreenState
   Widget build(BuildContext context) {
     print(_animationController?.value);
     return Scaffold(
-      backgroundColor: Color(0xffF7EBE1),
+      backgroundColor: backgroundColor,
       body: ClipRect(
         child: Stack(
           children: [
@@ -50,18 +49,11 @@ class _IntroductionAnimationScreenState
             RelaxView(
               animationController: _animationController!,
             ),
-            CareView(
-              animationController: _animationController!,
-            ),
-            MoodDiaryVew(
-              animationController: _animationController!,
-            ),
             WelcomeView(
               animationController: _animationController!,
             ),
             TopBackSkipView(
               onBackClick: _onBackClick,
-              onSkipClick: _onSkipClick,
               animationController: _animationController!,
             ),
             CenterNextButton(
@@ -74,10 +66,6 @@ class _IntroductionAnimationScreenState
     );
   }
 
-  void _onSkipClick() {
-    _animationController?.animateTo(0.8,
-        duration: Duration(milliseconds: 1200));
-  }
 
   void _onBackClick() {
     if (_animationController!.value >= 0 &&
@@ -86,15 +74,6 @@ class _IntroductionAnimationScreenState
     } else if (_animationController!.value > 0.2 &&
         _animationController!.value <= 0.4) {
       _animationController?.animateTo(0.2);
-    } else if (_animationController!.value > 0.4 &&
-        _animationController!.value <= 0.6) {
-      _animationController?.animateTo(0.4);
-    } else if (_animationController!.value > 0.6 &&
-        _animationController!.value <= 0.8) {
-      _animationController?.animateTo(0.6);
-    } else if (_animationController!.value > 0.8 &&
-        _animationController!.value <= 1.0) {
-      _animationController?.animateTo(0.8);
     }
   }
 
@@ -104,21 +83,13 @@ class _IntroductionAnimationScreenState
       _animationController?.animateTo(0.4);
     } else if (_animationController!.value > 0.2 &&
         _animationController!.value <= 0.4) {
-      _animationController?.animateTo(0.6);
-    } else if (_animationController!.value > 0.4 &&
-        _animationController!.value <= 0.6) {
-      _animationController?.animateTo(0.8);
-    } else if (_animationController!.value > 0.6 &&
-        _animationController!.value <= 0.8) {
       _signUpClick();
     }
   }
 
   void _signUpClick() {
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (_) => LoginScreen(),
-        ),
-            (route) => false);
+    Navigator.push(context, PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => Test(),
+    ));
   }
 }

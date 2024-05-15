@@ -1,8 +1,13 @@
+import 'dart:async';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../provider/battery.dart';
+import '../const/color.dart';
 import '../provider/nfc.dart';
 import '../user/view/treedisplay.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
+import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -11,41 +16,19 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
-  late NFCProvider _nfcProvider;
-  late BatteryProvider _batteryProvider;
+class _HomeState extends State<Home>{
 
-  @override
-  void initState() {
-    super.initState();
-    _nfcProvider = Provider.of<NFCProvider>(context, listen: false);
-    _nfcProvider.detectNFC();
-    _batteryProvider = Provider.of<BatteryProvider>(context, listen: false);
-    _batteryProvider.detectCharging();
-  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
       body: Center(
-        child: Consumer2<NFCProvider, BatteryProvider>(
-          builder: (context, nfcProvider, batteryProvider, _) {
-            if (nfcProvider.isNFCDetected || batteryProvider.isCharging) {
-              WidgetsBinding.instance?.addPostFrameCallback((_) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Tree()),
-                );
-              });
-            }
-            return Text(
-              nfcProvider.isNFCDetected
-                  ? 'NFC Detected! Navigating...'
-                  : 'Waiting for NFC Detection...',
-            );
-          },
-        ),
+        child: Text("setting page"
+          ,style: TextStyle(color: Colors.black),),
       ),
     );
   }
+
 }

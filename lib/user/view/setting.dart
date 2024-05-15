@@ -1,3 +1,4 @@
+import 'package:capstone/const/color.dart';
 import 'package:flutter/material.dart';
 
 class Setting extends StatefulWidget {
@@ -11,9 +12,10 @@ class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
       body: Center(
         child: Text("setting page"
-        ,style: TextStyle(color: Colors.white),),
+        ,style: TextStyle(color: Colors.black),),
       ),
     );
   }

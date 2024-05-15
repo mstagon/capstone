@@ -58,9 +58,9 @@ class _FireflyAnimationState extends State<FireflyAnimation> {
             left: firefly.dx * MediaQuery.of(context).size.width,
             top: firefly.dy * MediaQuery.of(context).size.height,
             child: NeonPoint(
-              pointSize: 2,
-              pointColor: Colors.yellow.shade50,
-              spreadColor: Colors.greenAccent,
+              pointSize: 3,
+              pointColor: Colors.brown.shade100,
+              spreadColor: Colors.green,
               lightSpreadRadius: 20,
             ),
           ),

@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import '../../component/custom_text_field.dart';
 import '../../layout/default_layout.dart';
 import '../../view/root.dart';
-
+import 'package:flutter_social_button/flutter_social_button.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -24,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
     // final emulatorIP = '10.0.2.2:3000';
     // final ip = emulatorIP;
     return DefaultLayout(
+      backgroundColor: backgroundColor,
       child: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: SafeArea(
@@ -34,11 +35,10 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _Title(),
                 SizedBox(height: 16.0,),
                 _subTitle(),
                 Image.asset(
-                  'asset/img/character.png',
+                  'asset/image/logo/logo.png',
                   width: MediaQuery.of(context).size.width / 3 * 2,
                 ),
                 CustomTextFormField(
@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     password = value;
                   },
                 ),
-                SizedBox(height: 16.0,),
+                SizedBox(height: 26.0,),
                 ElevatedButton(
                     onPressed: () async {
                       final rawString = '$username:$password';
@@ -85,42 +85,45 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     },
                     style:  ElevatedButton.styleFrom(
+                      foregroundColor: BODY_TEXT_COLOR,
                       backgroundColor: primaryColor,
+
                     ),
                     child: Text('로그인')),
-                TextButton(
-                    onPressed: () async {
-                      // final refreshToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAY29kZWZhY3RvcnkuYWkiLCJzdWIiOiJmNTViMzJkMi00ZDY4LTRjMWUtYTNjYS1kYTlkN2QwZDkyZTUiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTcwNjI1NzUyOCwiZXhwIjoxNzA2MzQzOTI4fQ.ZEpBqXXQCtlTsdgJ-iAbVxgRrtE8KE5LyGbN1y96uKY';
-                      // final resp = await dio.post('http://$ip/auth/token',options: Options(
-                      //     headers: {
-                      //       'authorization' : 'Bearer $refreshToken',
-                      //     }
-                      // )
-                      // );
-                      // print(resp.data);
-                    },
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.black,
-                    ),
-                    child: Text('회원가입'))
+                const SizedBox(height: 50),
+
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      FlutterSocialButton(
+                          onTap: () {
+                          },
+                          buttonType: ButtonType.facebook,
+                          mini:
+                          true // Button type for different type buttons
+                      ),
+                      // const SizedBox(width: 59.7,),
+                      FlutterSocialButton(
+                          onTap: () {},
+                          buttonType: ButtonType.google,
+                          mini:
+                          true // Button type for different type buttons
+                      ),
+                      // const SizedBox(width: 59.7,),
+                      FlutterSocialButton(
+                          onTap: () {},
+                          buttonType: ButtonType.apple,
+                          mini:
+                          true // Button type for different type buttons
+                      ),
+                    ]),
+                const SizedBox(height: 10),
+                const SizedBox(height: 10),
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class _Title extends StatelessWidget {
-  const _Title({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      "Digital Terrarium",
-      style: TextStyle(
-          fontSize: 34, fontWeight: FontWeight.w500, color: Colors.black),
     );
   }
 }
@@ -131,8 +134,8 @@ class _subTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      "Login",
-      style: TextStyle(fontSize: 16, color: BODY_TEXT_COLOR),
+      "로그인",
+      style: TextStyle(fontSize: 26, color: Colors.black),
     );
   }
 }

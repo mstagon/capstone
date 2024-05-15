@@ -8,13 +8,10 @@ class NFCProvider with ChangeNotifier {
 
   Future<void> detectNFC() async {
     try {
-      // Check NFC availability
       bool isNFCAvailable = await NfcManager.instance.isAvailable();
       if (isNFCAvailable) {
-        // Start NFC session
         NfcManager.instance.startSession(
           onDiscovered: (NfcTag tag) async {
-            // Set NFC detected to true
             _isNFCDetected = true;
             notifyListeners();
             NfcManager.instance.stopSession();

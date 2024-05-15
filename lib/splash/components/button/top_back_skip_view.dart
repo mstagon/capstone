@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 class TopBackSkipView extends StatelessWidget {
   final AnimationController animationController;
   final VoidCallback onBackClick;
-  final VoidCallback onSkipClick;
 
   const TopBackSkipView({
     Key? key,
     required this.onBackClick,
-    required this.onSkipClick,
     required this.animationController,
   }) : super(key: key);
 
@@ -25,26 +23,6 @@ class TopBackSkipView extends StatelessWidget {
       ),
     ));
 
-    // final _backAnimation =
-    //     Tween<Offset>(begin: Offset(0, 0), end: Offset(-2, 0))
-    //         .animate(CurvedAnimation(
-    //   parent: animationController,
-    //   curve: Interval(
-    //     0.6,
-    //     0.8,
-    //     curve: Curves.fastOutSlowIn,
-    //   ),
-    // ));
-    final _skipAnimation = Tween<Offset>(begin: Offset(0, 0), end: Offset(2, 0))
-        .animate(CurvedAnimation(
-      parent: animationController,
-      curve: Interval(
-        0.6,
-        0.8,
-        curve: Curves.fastOutSlowIn,
-      ),
-    ));
-
     return SlideTransition(
       position: _animation,
       child: Padding(
@@ -56,20 +34,10 @@ class TopBackSkipView extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // SlideTransition(
-                //   position: _backAnimation,
-                //   child:
                 IconButton(
                   onPressed: onBackClick,
                   icon: Icon(Icons.arrow_back_ios_new_rounded),
                   //   ),
-                ),
-                SlideTransition(
-                  position: _skipAnimation,
-                  child: IconButton(
-                    onPressed: onSkipClick,
-                    icon: Text('Skip'),
-                  ),
                 ),
               ],
             ),

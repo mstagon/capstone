@@ -2,6 +2,14 @@ PODS:
   - battery_plus (1.0.0):
     - Flutter
   - Flutter (1.0.0)
+  - flutter_background_service_ios (0.0.3):
+    - Flutter
+  - flutter_blue_plus (0.0.1):
+    - Flutter
+    - flutter_blue_plus/Protos (= 0.0.1)
+  - flutter_blue_plus/Protos (0.0.1):
+    - Flutter
+    - Protobuf (~> 3.11)
   - flutter_secure_storage (6.0.0):
     - Flutter
   - nfc_manager (0.0.1):
@@ -9,19 +17,30 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - Protobuf (3.26.1)
 
 DEPENDENCIES:
   - battery_plus (from `.symlinks/plugins/battery_plus/ios`)
   - Flutter (from `Flutter`)
+  - flutter_background_service_ios (from `.symlinks/plugins/flutter_background_service_ios/ios`)
+  - flutter_blue_plus (from `.symlinks/plugins/flutter_blue_plus/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - nfc_manager (from `.symlinks/plugins/nfc_manager/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+
+SPEC REPOS:
+  trunk:
+    - Protobuf
 
 EXTERNAL SOURCES:
   battery_plus:
     :path: ".symlinks/plugins/battery_plus/ios"
   Flutter:
     :path: Flutter
+  flutter_background_service_ios:
+    :path: ".symlinks/plugins/flutter_background_service_ios/ios"
+  flutter_blue_plus:
+    :path: ".symlinks/plugins/flutter_blue_plus/ios"
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
   nfc_manager:
@@ -32,10 +51,13 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   battery_plus: 1ff2e16ba75af2a78387f65476057a390b47885e
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_background_service_ios: e30e0d3ee69e4cee66272d0c78eacd48c2e94aac
+  flutter_blue_plus: 6787777145d615de01828f3a9fa423c3c702f0b3
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
   nfc_manager: d7da7cb781f7744b94df5fe9dbca904ac4a0939e
   path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
+  Protobuf: a53f5173a603075b3522a5c50be63a67a5f3353a
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.13.0

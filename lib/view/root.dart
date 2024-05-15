@@ -1,7 +1,10 @@
+import 'package:capstone/const/color.dart';
+import 'package:capstone/user/view/terrariumshop.dart';
+import 'package:capstone/user/view/test.dart';
 import 'package:capstone/view/home.dart';
 import 'package:flutter/material.dart';
-import 'package:capstone/user/view/treedisplay.dart';
 import '../user/view/setting.dart';
+import '../user/view/treedisplay.dart';
 
 class Rootscreen extends StatefulWidget {
   const Rootscreen({super.key});
@@ -18,7 +21,7 @@ class _RootscreenState extends State<Rootscreen> with
   void initState(){
     super.initState();
 
-    controller = TabController(length: 2, vsync: this);
+    controller = TabController(length: 3, vsync: this);
     controller!.addListener(tabListner);
   }
 
@@ -47,13 +50,15 @@ class _RootscreenState extends State<Rootscreen> with
   List<Widget> renderChildren() {
     return [
       Home(),
-      // Tree(),
+      Test(),
       Setting()
     ];
   }
 
   BottomNavigationBar renderBottomNavigation() {
     return BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         currentIndex: controller!.index,
         onTap: (int index){
           setState(() {
@@ -65,10 +70,9 @@ class _RootscreenState extends State<Rootscreen> with
               Icons.home//edgesensor_high_outlined
           ),label: "1"
           ),
-          // BottomNavigationBarItem(icon: Icon(
-          //     Icons.gamepad//edgesensor_high_outlined
-          // ),label: "2"
-          //),
+          BottomNavigationBarItem( icon: Image.asset("asset/image/trsicon.png", width: 30, height: 30, color: secondaryColor),
+              activeIcon: Image.asset("asset/image/trsicon.png", width: 30, height: 30, color: primaryColor),label: "2"
+          ),
           BottomNavigationBarItem(icon: Icon(
               Icons.settings
           ),label: "3"

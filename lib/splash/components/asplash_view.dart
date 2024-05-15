@@ -28,29 +28,32 @@ class _SplashViewState extends State<SplashView> {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: 100,),
+
             SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Image.asset(
-                'asset/img/splash/introduction_image.png',
+                'asset/image/logo/logo.png',
                 fit: BoxFit.cover,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: Text(
-                "Clearhead",
+                "휴림",
                 style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
               ),
             ),
+
             Padding(
               padding: EdgeInsets.only(left: 64, right: 64),
               child: Text(
-                "Lorem ipsum dolor sit amet,consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore",
+                "현대인의 작은 휴식처",
                 textAlign: TextAlign.center,
               ),
             ),
             SizedBox(
-              height: 48,
+              height: 108,
             ),
             Padding(
               padding: EdgeInsets.only(
@@ -72,7 +75,7 @@ class _SplashViewState extends State<SplashView> {
                     color: Color(0xff132137),
                   ),
                   child: Text(
-                    "Let's begin",
+                    "시작 하기",
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.white,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:capstone/const/color.dart';
 class DefaultLayout extends StatelessWidget {
   final Color? backgroundColor;
   final Widget child;
@@ -8,7 +8,7 @@ class DefaultLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: backgroundColor ?? Colors.white,
+        backgroundColor: backgroundColor,
         body: child
     );
   }
