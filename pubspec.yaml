@@ -109,12 +109,12 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-      - family: PretendardBold
+      - family: HancomMalangMalang-Bold
         fonts:
-            - asset: assets/fonts/Pretendard-Bold.otf
-              - family: PretendardSemiBold
-                fonts:
-                  - asset: assets/fonts/Pretendard-SemiBold.otf
+            - asset: asset/fonts/HancomMalangMalang-Bold.otf
+      - family: HancomMalangMalang-Regular
+        fonts:
+          - asset: asset/fonts/HancomMalangMalang-Regular.otf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
