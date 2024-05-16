@@ -20,8 +20,10 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   String imagePath = 'asset/image/plants/default.png';
-  String tx = "성장중 . . .";
+  String tx = "식물이 자고 있습니다. \n 테리리움에 핸드폰을 \n넣어 식물을 깨워주세요.";
   bool isVisible = false;
+  bool stopButtonVisible = false;
+  bool candetect = true;
 
   @override
   void initState() {
@@ -40,6 +42,22 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
     _nfcProvider.detectNFC();
   }
 
+  void toggleStopButton() {
+    setState(() {
+      candetect = true;
+      stopButtonVisible = !stopButtonVisible;
+    });
+    if (!stopButtonVisible) {
+      final _timerProvider = Provider.of<TimerProvider>(context, listen: false);
+      _timerProvider.stopTimer();
+      setState(() {
+        imagePath = 'asset/image/plants/default.png';
+        tx = "식물이 자고 있습니다. \n 테리리움에 핸드폰을 \n넣어 식물을 깨워주세요.";
+        isVisible = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,23 +66,20 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
         child: Consumer<NFCProvider>(
           builder: (context, nfcProvider, _) {
             final _timerProvider = Provider.of<TimerProvider>(context, listen: false);
-            if (nfcProvider.isNFCDetected) {
-              imagePath = 'asset/image/plants/a3.png';
-              tx = "성장중 . . .";
-              isVisible = true;
-              if (!_timerProvider.isRunning) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  _timerProvider.startTimer();
-                });
-              }
-            } else {
-              imagePath = 'asset/image/plants/default.png';
-              tx = "식물이 자고 있습니다. \n 테리리움에 핸드폰을 \n넣어 식물을 깨워주세요.";
-              isVisible = false;
-              if (_timerProvider.isRunning) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  _timerProvider.stopTimer();
-                });
+            if(nfcProvider.isNFCDetected) {
+              if (candetect) {
+                candetect = false;
+                imagePath = 'asset/image/plants/a3.png';
+                tx = "성장중 . . .";
+                isVisible = true;
+                if (!_timerProvider.isRunning) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    _timerProvider.startTimer();
+                    setState(() {
+                      stopButtonVisible = true;
+                    });
+                  });
+                }
               }
             }
             return Stack(
@@ -72,17 +87,6 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        imagePath = 'asset/image/plants/a3.png';
-                        tx = "성장중 . . .";
-                        isVisible = true;
-                        if (!_timerProvider.isRunning) {
-                          _timerProvider.startTimer();
-                        }
-                      },
-                      child: Text("a"),
-                    ),
                     SizedBox(height: 100),
                     AnimatedBuilder(
                       animation: _controller,
@@ -109,12 +113,26 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
                     SizedBox(height: 20),
                     Consumer<TimerProvider>(
                       builder: (context, timerProvider, _) {
-                        return Text(
-                          '${timerProvider.seconds}',
-                          style: TextStyle(fontSize: 48),
+                        return Container(
+                          child: Text(
+                            timerProvider.formattedTime,
+                            style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+                          ),
                         );
                       },
                     ),
+                    SizedBox(height: 30,),
+                    if (stopButtonVisible)
+                      ElevatedButton(
+                        style:  ElevatedButton.styleFrom(
+                          foregroundColor: BODY_TEXT_COLOR,
+                          backgroundColor: primaryColor,
+                          minimumSize: Size(MediaQuery.of(context).size.width * 0.6, 50)
+
+                        ),
+                        onPressed: toggleStopButton,
+                        child: Text("Stop"),
+                      ),
                   ],
                 ),
                 Topbutton_main(),
@@ -154,33 +172,6 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
                   ],
                 ),
                 isVisible ? FireflyAnimation() : SizedBox(),
-                isVisible
-                    ? Positioned(
-                  top: MediaQuery.of(context).size.height * 0.7,
-                  left: MediaQuery.of(context).size.width * 0.25,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Container(
-                        height: 50,
-                        width: 200,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            _timerProvider.stopTimer();
-                            setState(() {
-                              imagePath = 'asset/image/plants/default.png';
-                              tx = "식물이 자고 있습니다. \n 테리리움에 핸드폰을 \n넣어 식물을 깨워주세요.";
-                            });
-                          },
-                          child: Text('Stop'),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-                    : SizedBox(),
               ],
             );
           },

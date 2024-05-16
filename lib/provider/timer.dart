@@ -9,6 +9,13 @@ class TimerProvider with ChangeNotifier {
   int get seconds => _seconds;
   bool get isRunning => _isRunning;
 
+  String get formattedTime {
+    final hours = (_seconds ~/ 3600).toString().padLeft(2, '0');
+    final minutes = ((_seconds % 3600) ~/ 60).toString().padLeft(2, '0');
+    final seconds = (_seconds % 60).toString().padLeft(2, '0');
+    return '$hours:$minutes:$seconds';
+  }
+
   void startTimer() {
     if (_isRunning) return;
     _isRunning = true;
@@ -21,6 +28,7 @@ class TimerProvider with ChangeNotifier {
   void stopTimer() {
     _timer?.cancel();
     _isRunning = false;
+    _seconds = 0;
     notifyListeners();
   }
 
