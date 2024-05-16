@@ -81,6 +81,7 @@ class _LightPageState extends State<LightPage> {
                       imagePath: plantInfo['imagePath'],
                       imageName: plantInfo['imageName'],
                       imageExplain: plantInfo['imageExplain'],
+                      price: 100,
                       pagePath: (LightPage()),
                     ),
                   ),

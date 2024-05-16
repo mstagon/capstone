@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:capstone/const/color.dart';
+import 'package:capstone/const/color.dart';
 
 class Pdbutton extends StatelessWidget {
   final String imagePath;
   final String imageName;
   final String imageExplain;
+  final int price;
   final dynamic pagePath;
 
-  Pdbutton({required this.imagePath, required this.imageName, required this.pagePath, required this.imageExplain});
+  Pdbutton({required this.imagePath, required this.imageName, required this.pagePath, required this.imageExplain, required this.price});
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +50,12 @@ class Pdbutton extends StatelessWidget {
                     color: fontColor,
                   ),
                 ),
-                SizedBox(height: 4.0),
+                SizedBox(height: 4.0,),
                 Text(
-                  imageExplain,
+                  '가격: ' + price.toString(),
                   style: TextStyle(
                     fontSize: 16,
-                    color: fontColor.withOpacity(0.7),
+                    color: fontColor,
                   ),
                 ),
               ],
