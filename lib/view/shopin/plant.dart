@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:capstone/const/color.dart';
 import 'package:capstone/component/top_button.dart';
 import '../../component/dialog.dart';
-import '../../component/img_button.dart';
 import '../../component/product_button.dart';
+import '../../component/product_info.dart';
 
 class PlantPage extends StatefulWidget {
   const PlantPage({Key? key}) : super(key: key);
@@ -13,58 +13,8 @@ class PlantPage extends StatefulWidget {
 }
 
 class _PlantPageState extends State<PlantPage> {
-  final List<Map<String, dynamic>> plantInfoList = [
-    {
-      'imagePaths': ['asset/image/plant.png', 'asset/image/plant.png', 'asset/image/ornament.png',],
-      'imagePath': 'asset/image/plant.png',
-      'imageName': '식물 1',
-      'price': 100,
-      'imageExplain': '설명',
-    },
-    {
-      'imagePaths': ['asset/image/plant.png', 'asset/image/plant.png', 'asset/image/ornament.png',],
-      'imagePath': 'asset/image/plant.png',
-      'imageName': '식물 1',
-      'price': 100,
-      'imageExplain': '설명',
-    },
-    {
-      'imagePaths': ['asset/image/plant.png', 'asset/image/plant.png', 'asset/image/ornament.png',],
-      'imagePath': 'asset/image/plant.png',
-      'imageName': '식물 1',
-      'price': 100,
-      'imageExplain': '설명',
-    },
-    {
-      'imagePaths': ['asset/image/plant.png', 'asset/image/plant.png', 'asset/image/ornament.png',],
-      'imagePath': 'asset/image/plant.png',
-      'imageName': '식물 1',
-      'price': 100,
-      'imageExplain': '설명',
-    },
-    {
-      'imagePaths': ['asset/image/plant.png', 'asset/image/plant.png', 'asset/image/ornament.png',],
-      'imagePath': 'asset/image/plant.png',
-      'imageName': '식물 1',
-      'price': 100,
-      'imageExplain': '설명',
-    },
-    {
-      'imagePaths': ['asset/image/plant.png', 'asset/image/plant.png', 'asset/image/ornament.png',],
-      'imagePath': 'asset/image/plant.png',
-      'imageName': '식물 1',
-      'price': 100,
-      'imageExplain': '설명',
-    },
-    {
-      'imagePaths': ['asset/image/plant.png', 'asset/image/plant.png', 'asset/image/ornament.png',],
-      'imagePath': 'asset/image/plant.png',
-      'imageName': '식물 1',
-      'price': 100,
-      'imageExplain': '설명',
-    },
-    // Add more plant information as needed
-  ];
+
+  List<Map<String, dynamic>> plantInfoList = generatePlantInfoList();
 
   @override
   Widget build(BuildContext context) {
@@ -100,16 +50,10 @@ class _PlantPageState extends State<PlantPage> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Pdbutton(
+                      index: index,
                       imagePath: plantInfo['imagePath'],
                       imageName: plantInfo['imageName'],
-                      imageExplain: plantInfo['imageExplain'],
                       price: plantInfo['price'],
-                      pagePath: PlantDetailDialog(
-                        imagePaths: plantInfo['imagePaths'],
-                        imageName: plantInfo['imageName'],
-                        imageExplain: plantInfo['imageExplain'],
-                        price: plantInfo['price'],
-                      ),
                     ),
                   ),
                 );

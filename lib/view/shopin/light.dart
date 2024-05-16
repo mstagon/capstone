@@ -80,9 +80,9 @@ class _LightPageState extends State<LightPage> {
                     child: Pdbutton(
                       imagePath: plantInfo['imagePath'],
                       imageName: plantInfo['imageName'],
-                      imageExplain: plantInfo['imageExplain'],
-                      price: 100,
-                      pagePath: (LightPage()),
+                      // imageExplain: plantInfo['imageExplain'],
+                      price: 100, index: index,
+                      // pagePath: (LightPage()),
                     ),
                   ),
                 );

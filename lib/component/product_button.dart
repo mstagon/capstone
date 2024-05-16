@@ -1,18 +1,22 @@
+import 'package:capstone/component/product_info.dart';
 import 'package:flutter/material.dart';
 import 'package:capstone/const/color.dart';
-import 'package:capstone/const/color.dart';
+import 'package:capstone/component/dialog.dart';
 
 class Pdbutton extends StatelessWidget {
   final String imagePath;
   final String imageName;
-  final String imageExplain;
   final int price;
-  final dynamic pagePath;
+  final int index;
 
-  Pdbutton({required this.imagePath, required this.imageName, required this.pagePath, required this.imageExplain, required this.price});
+  Pdbutton({required this.imagePath, required this.imageName, required this.price, required this.index});
 
   @override
   Widget build(BuildContext context) {
+    // Fetch plant info from generatePlantInfoList
+    List<Map<String, dynamic>> plantInfoList = generatePlantInfoList();
+    final Map<String, dynamic> plantInfo = plantInfoList[index];
+
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
         backgroundColor: buttonColor,
@@ -20,10 +24,16 @@ class Pdbutton extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.0),
         ),
       ),
-      onPressed: () {
-        Navigator.push(
+      onPressed: () async {
+        // Show dialog with the first plant info from the list
+        showPlantDetailDialog(
           context,
-          MaterialPageRoute(builder: (context) => pagePath),
+          PlantDetailDialog(
+            imagePaths: plantInfoList[index]['imagePaths'],
+            imageName: plantInfoList[index]['imageName'],
+            imageExplain: plantInfoList[index]['imageExplain'],
+            price: plantInfoList[index]['price'],
+          ),
         );
       },
       child: Row(
