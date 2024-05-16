@@ -87,9 +87,9 @@ class _OrnamentPageState extends State<OrnamentPage> {
                     child: Pdbutton(
                       imagePath: plantInfo['imagePath'],
                       imageName: plantInfo['imageName'],
-                      imageExplain: plantInfo['imageExplain'],
-                      price: 100,
-                      pagePath: (OrnamentPage()),
+                      // imageExplain: plantInfo['imageExplain'],
+                      price: 100, index: index,
+                      // pagePath: (OrnamentPage()),
                     ),
                   ),
                 );

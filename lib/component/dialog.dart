@@ -18,6 +18,11 @@ class PlantDetailDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      elevation: 10.0,
+      backgroundColor: Colors.pink,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(32)),
+      ),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -77,11 +82,9 @@ class PlantDetailDialog extends StatelessWidget {
                 final moneyProvider = Provider.of<Money>(context, listen: false);
                 if (moneyProvider.usermoney >= price) {
                   moneyProvider.decrease(price);
-                  // 여기에 구매 완료 메시지 또는 다른 작업을 수행할 수 있습니다.
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('구매가 완료되었습니다.')));
                   Navigator.pop(context); // 다이얼로그 닫기
                 } else {
-                  // 사용자의 돈이 부족할 때의 처리
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('잔액이 부족합니다.')));
                 }
               },
@@ -92,4 +95,11 @@ class PlantDetailDialog extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> showPlantDetailDialog(BuildContext context, PlantDetailDialog dialog) async {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) => dialog,
+  );
 }
