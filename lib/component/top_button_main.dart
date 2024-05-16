@@ -19,7 +19,6 @@ class _Topbutton_mainState extends State<Topbutton_main> {
 
   @override
   Widget build(BuildContext context) {
-    int _money = Provider.of<Money>(context, listen: false).usermoney;
     return Padding(
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
       child: Container(
@@ -35,13 +34,18 @@ class _Topbutton_mainState extends State<Topbutton_main> {
                   Stack(
                     children: [
                       Image.asset(height: 40,"asset/image/icon/point.png"),
-                      Positioned(
-                          top: MediaQuery.of(context).size.height * 0.012,
-                          left: MediaQuery.of(context).size.height * 0.04,
-                          child: Text(
-                            '$_money',
-                            style: TextStyle(fontSize: 16, color: ACCENT_TEXT_COLOR),
-                          )),
+                      Consumer<Money>(
+                        builder: (context, moneyProvider, _) {
+                          return Positioned(
+                            top: MediaQuery.of(context).size.height * 0.012,
+                            left: MediaQuery.of(context).size.height * 0.04,
+                            child: Text(
+                              '${moneyProvider.usermoney}',
+                              style: TextStyle(fontSize: 16, color: ACCENT_TEXT_COLOR),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ],
