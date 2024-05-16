@@ -14,6 +14,10 @@ class NFCProvider with ChangeNotifier {
           onDiscovered: (NfcTag tag) async {
             _isNFCDetected = true;
             notifyListeners();
+
+            await Future.delayed(Duration(seconds: 1));
+            _resetNFCDetection();
+
             NfcManager.instance.stopSession();
           },
         );
@@ -21,5 +25,10 @@ class NFCProvider with ChangeNotifier {
     } catch (e) {
       print('Error detecting NFC: $e');
     }
+  }
+
+  void _resetNFCDetection() {
+    _isNFCDetected = false;
+    notifyListeners();
   }
 }
