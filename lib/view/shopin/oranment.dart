@@ -16,6 +16,7 @@ class _OrnamentPageState extends State<OrnamentPage> {
       'imagePath': 'asset/image/ornament.png',
       'imageName': '장식 1',
       'imageExplain': '설명',
+
     },
     {
       'imagePath': 'asset/image/ornament.png',
@@ -87,6 +88,7 @@ class _OrnamentPageState extends State<OrnamentPage> {
                       imagePath: plantInfo['imagePath'],
                       imageName: plantInfo['imageName'],
                       imageExplain: plantInfo['imageExplain'],
+                      price: 100,
                       pagePath: (OrnamentPage()),
                     ),
                   ),

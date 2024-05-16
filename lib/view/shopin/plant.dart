@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:capstone/const/color.dart';
 import 'package:capstone/component/top_button.dart';
 import '../../component/dialog.dart';
+import '../../component/img_button.dart';
 import '../../component/product_button.dart';
 
 class PlantPage extends StatefulWidget {
@@ -17,42 +18,49 @@ class _PlantPageState extends State<PlantPage> {
       'imagePaths': ['asset/image/plant.png', 'asset/image/plant.png', 'asset/image/ornament.png',],
       'imagePath': 'asset/image/plant.png',
       'imageName': '식물 1',
-      'imageExplain': '설명',
-    },
-    {
-      'imagePaths': ['asset/image/plant.png', 'asset/image/plant.png', 'asset/image/ornament.png',],
-      'imagePath': 'asset/image/plant.png',
-      'imageName': '식물 12',
-      'imageExplain': '설명',
-    },
-    {
-      'imagePaths': ['asset/image/plant.png', 'asset/image/plant.png', 'asset/image/ornament.png',],
-      'imagePath': 'asset/image/plant.png',
-      'imageName': '식물 1',
+      'price': 100,
       'imageExplain': '설명',
     },
     {
       'imagePaths': ['asset/image/plant.png', 'asset/image/plant.png', 'asset/image/ornament.png',],
       'imagePath': 'asset/image/plant.png',
       'imageName': '식물 1',
+      'price': 100,
       'imageExplain': '설명',
     },
     {
       'imagePaths': ['asset/image/plant.png', 'asset/image/plant.png', 'asset/image/ornament.png',],
       'imagePath': 'asset/image/plant.png',
       'imageName': '식물 1',
+      'price': 100,
       'imageExplain': '설명',
     },
     {
       'imagePaths': ['asset/image/plant.png', 'asset/image/plant.png', 'asset/image/ornament.png',],
       'imagePath': 'asset/image/plant.png',
       'imageName': '식물 1',
+      'price': 100,
       'imageExplain': '설명',
     },
     {
       'imagePaths': ['asset/image/plant.png', 'asset/image/plant.png', 'asset/image/ornament.png',],
       'imagePath': 'asset/image/plant.png',
       'imageName': '식물 1',
+      'price': 100,
+      'imageExplain': '설명',
+    },
+    {
+      'imagePaths': ['asset/image/plant.png', 'asset/image/plant.png', 'asset/image/ornament.png',],
+      'imagePath': 'asset/image/plant.png',
+      'imageName': '식물 1',
+      'price': 100,
+      'imageExplain': '설명',
+    },
+    {
+      'imagePaths': ['asset/image/plant.png', 'asset/image/plant.png', 'asset/image/ornament.png',],
+      'imagePath': 'asset/image/plant.png',
+      'imageName': '식물 1',
+      'price': 100,
       'imageExplain': '설명',
     },
     // Add more plant information as needed
@@ -95,10 +103,12 @@ class _PlantPageState extends State<PlantPage> {
                       imagePath: plantInfo['imagePath'],
                       imageName: plantInfo['imageName'],
                       imageExplain: plantInfo['imageExplain'],
+                      price: plantInfo['price'],
                       pagePath: PlantDetailDialog(
                         imagePaths: plantInfo['imagePaths'],
                         imageName: plantInfo['imageName'],
                         imageExplain: plantInfo['imageExplain'],
+                        price: plantInfo['price'],
                       ),
                     ),
                   ),
