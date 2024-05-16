@@ -17,67 +17,72 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> with SingleTickerProviderStateMixin {
-  late NFCProvider _nfcProvider;
-  late TimerModel _timerProvider;
   late AnimationController _controller;
   late Animation<double> _animation;
   String imagePath = 'asset/image/plants/default.png';
   String tx = "성장중 . . .";
-  bool isVisible = true;
-  Duration _elapsedTime = Duration.zero;
-  bool _isRunning = false;
-  late Stopwatch _stopwatch;
-  dynamic textcolor = BODY_TEXT_COLOR;
-
+  bool isVisible = false;
 
   @override
   void initState() {
     super.initState();
-    _nfcProvider = Provider.of<NFCProvider>(context, listen: false);
-    _timerProvider = Provider.of<TimerModel>(context, listen: false);
-    _nfcProvider.detectNFC();
     _controller = AnimationController(
       vsync: this,
       duration: Duration(seconds: 2),
-    )..repeat(reverse: true); // 애니메이션을 반복하고 역방향으로도 실행합니다.
+    )..repeat(reverse: true);
     _animation = Tween<double>(begin: 200.0, end: 210.0).animate(_controller);
   }
 
-  void _stopStopwatch() {
-    if (_stopwatch.isRunning) {
-      _stopwatch.stop();
-      _isRunning = false;
-      imagePath = 'asset/image/plants/default.png';
-      tx = "식물이 자고 있습니다. \n 테리리움에 핸드폰을 \n넣어 식물을 깨워주세요.";
-      isVisible = false;
-    }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final _nfcProvider = Provider.of<NFCProvider>(context);
+    _nfcProvider.detectNFC();
   }
 
   @override
   Widget build(BuildContext context) {
-    String hour =_timerProvider.hours.toString();
-    String minute = _timerProvider.minutes.toString();
-    String sec = _timerProvider.seconds.toString();
     return Scaffold(
       backgroundColor: backgroundColor,
       body: Center(
-        child: Consumer2<NFCProvider, TimerModel>(
-          builder: (context, nfcProvider,timerProvider, _) {
+        child: Consumer<NFCProvider>(
+          builder: (context, nfcProvider, _) {
+            final _timerProvider = Provider.of<TimerProvider>(context, listen: false);
             if (nfcProvider.isNFCDetected) {
               imagePath = 'asset/image/plants/a3.png';
-              tx = "";
+              tx = "성장중 . . .";
               isVisible = true;
-              _timerProvider.startTimer;
+              if (!_timerProvider.isRunning) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  _timerProvider.startTimer();
+                });
+              }
             } else {
               imagePath = 'asset/image/plants/default.png';
               tx = "식물이 자고 있습니다. \n 테리리움에 핸드폰을 \n넣어 식물을 깨워주세요.";
               isVisible = false;
+              if (_timerProvider.isRunning) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  _timerProvider.stopTimer();
+                });
+              }
             }
             return Stack(
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        imagePath = 'asset/image/plants/a3.png';
+                        tx = "성장중 . . .";
+                        isVisible = true;
+                        if (!_timerProvider.isRunning) {
+                          _timerProvider.startTimer();
+                        }
+                      },
+                      child: Text("a"),
+                    ),
                     SizedBox(height: 100),
                     AnimatedBuilder(
                       animation: _controller,
@@ -101,8 +106,14 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
+                    SizedBox(height: 20),
+                    Consumer<TimerProvider>(
+                      builder: (context, timerProvider, _) {
+                        return Text(
+                          '${timerProvider.seconds}',
+                          style: TextStyle(fontSize: 48),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -117,10 +128,9 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
                           height: 100,
                         ),
                         InkWell(
-                          onTap : (){
+                          onTap: () {
                             Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => Shop())
-                            );
+                                MaterialPageRoute(builder: (_) => Shop()));
                           },
                           child: Image.asset(
                             height: 50,
@@ -140,35 +150,36 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
                         ),
                       ],
                     ),
-                    SizedBox(width: 15,),
+                    SizedBox(width: 15),
                   ],
                 ),
                 isVisible ? FireflyAnimation() : SizedBox(),
                 isVisible
                     ? Positioned(
-                        top: MediaQuery.of(context).size.height * 0.7,
-                        left: MediaQuery.of(context).size.width * 0.25,
-                        child: Column(
-                          children: [
-                            Text(
-                              '몰라',
-                              style:
-                                  TextStyle(fontSize: 48, color: textcolor),
-                            ),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            Container(
-                              height: 50,
-                              width: 200,
-                              child: ElevatedButton(
-                                onPressed: _stopStopwatch,
-                                child: Text('Stop'),
-                              ),
-                            ),
-                          ],
+                  top: MediaQuery.of(context).size.height * 0.7,
+                  left: MediaQuery.of(context).size.width * 0.25,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        height: 50,
+                        width: 200,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _timerProvider.stopTimer();
+                            setState(() {
+                              imagePath = 'asset/image/plants/default.png';
+                              tx = "식물이 자고 있습니다. \n 테리리움에 핸드폰을 \n넣어 식물을 깨워주세요.";
+                            });
+                          },
+                          child: Text('Stop'),
                         ),
-                      )
+                      ),
+                    ],
+                  ),
+                )
                     : SizedBox(),
               ],
             );

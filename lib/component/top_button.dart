@@ -41,13 +41,17 @@ class _TopbuttonState extends State<Topbutton> {
                   Stack(
                     children: [
                       Image.asset(height: 40,"asset/image/icon/point.png"),
-                      Positioned(
-                          top: MediaQuery.of(context).size.height * 0.012,
-                          left: MediaQuery.of(context).size.height * 0.04,
-                          child: Text(
-                            '$_money',
-                            style: TextStyle(fontSize: 16, color: ACCENT_TEXT_COLOR),
-                          )),
+                      Consumer<Money>(
+                        builder: (context, moneyProvider, _) {
+                          return Positioned(
+                              top: MediaQuery.of(context).size.height * 0.012,
+                              left: MediaQuery.of(context).size.height * 0.04,
+                              child: Text(
+                                '$_money',
+                                style: TextStyle(fontSize: 16, color: ACCENT_TEXT_COLOR),
+                              ));
+                        },
+                      ),
                     ],
                   ),
                 ],

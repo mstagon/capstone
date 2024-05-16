@@ -1,46 +1,33 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 
-import 'package:flutter/material.dart';
-
-
-class TimerModel extends ChangeNotifier {
-  int _hours = 0;
-  int _minutes = 0;
-  int _seconds = 0;
+class TimerProvider with ChangeNotifier {
   Timer? _timer;
+  int _seconds = 0;
+  bool _isRunning = false;
 
-  int get hours => _hours;
-  int get minutes => _minutes;
   int get seconds => _seconds;
-
-  bool get isRunning => _timer != null && _timer!.isActive;
+  bool get isRunning => _isRunning;
 
   void startTimer() {
-    if (_timer == null || !_timer!.isActive) {
-      _timer = Timer.periodic(Duration(seconds: 1), (_) {
-        _seconds++;
-        if (_seconds == 60) {
-          _seconds = 0;
-          _minutes++;
-        }
-        if (_minutes == 60) {
-          _minutes = 0;
-          _hours++;
-        }
-        notifyListeners();
-      });
-    }
+    if (_isRunning) return;
+    _isRunning = true;
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      _seconds++;
+      notifyListeners();
+    });
   }
 
   void stopTimer() {
     _timer?.cancel();
+    _isRunning = false;
     notifyListeners();
   }
 
   void resetTimer() {
-    _hours = 0;
-    _minutes = 0;
+    _timer?.cancel();
     _seconds = 0;
+    _isRunning = false;
     notifyListeners();
   }
 }

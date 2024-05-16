@@ -21,17 +21,16 @@ import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 
 Future<void> main() async {
-  /*WidgetsFlutterBinding.ensureInitialized();
-  await initalizeService();*/
   runApp(
       MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => NFCProvider()),
           ChangeNotifierProvider(create: (_) => Money()),
-          ChangeNotifierProvider(create: (_) => TimerModel()),
+          ChangeNotifierProvider(create: (_) => TimerProvider())
         ],
         child: MaterialApp(
           theme: ThemeData(
+            fontFamily: "HancomMalangMalang-Bold",
               appBarTheme: AppBarTheme(
                 backgroundColor: backgroundColor,
 
