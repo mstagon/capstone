@@ -6,6 +6,7 @@ import 'package:capstone/provider/battery.dart';
 import 'package:capstone/provider/ble.dart';
 import 'package:capstone/provider/money.dart';
 import 'package:capstone/provider/nfc.dart';
+import 'package:capstone/provider/purchase_provider.dart';
 import 'package:capstone/provider/timer.dart';
 import 'package:capstone/splash/introduction_animation_screen.dart';
 import 'package:capstone/user/view/login_screen.dart';
@@ -26,7 +27,8 @@ Future<void> main() async {
         providers: [
           ChangeNotifierProvider(create: (_) => NFCProvider()),
           ChangeNotifierProvider(create: (_) => Money()),
-          ChangeNotifierProvider(create: (_) => TimerProvider())
+          ChangeNotifierProvider(create: (_) => TimerProvider()),
+          ChangeNotifierProvider(create: (_) => PurchaseProvider())
         ],
         child: MaterialApp(
           theme: ThemeData(
