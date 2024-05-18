@@ -107,11 +107,19 @@ class PlantDetailDialog extends StatelessWidget {
                               imageName: imageName,
                               imagePath: imagePaths[0])); // Add the first image as the item image
                           ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('구매가 완료되었습니다.')));
-                          Navigator.pop(context); // Close the dialog
+                            SnackBar(
+                              content: Text('구매가 완료되었습니다.'),
+                              duration: Duration(milliseconds: 500),
+                            ),
+                          );
+                          Navigator.pop(context);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('잔액이 부족합니다.')));
+                            SnackBar(
+                              content: Text('잔액이 부족합니다.'),
+                              duration: Duration(milliseconds: 500),
+                            ),
+                          );
                         }
                       },
                       style: ElevatedButton.styleFrom(
