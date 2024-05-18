@@ -1,7 +1,10 @@
+import 'package:capstone/component/maindeco.dart';
 import 'package:capstone/component/maindialog.dart';
+import 'package:capstone/component/mainlight.dart';
 import 'package:capstone/component/top_button.dart';
 import 'package:capstone/component/top_button_main.dart';
 import 'package:capstone/const/color.dart';
+import 'package:capstone/provider/purchase_deco.dart';
 import 'package:capstone/provider/timer.dart';
 import 'package:capstone/view/shop.dart';
 import 'package:flutter/cupertino.dart';
@@ -180,10 +183,34 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
                         SizedBox(
                           height: 15,
                         ),
-                        Container(
+                        InkWell(
+                          onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => PurchasedLightDialog(
+                                    onItemSelected: showSelectedImage),
+                              );
+                          },
                           child: Image.asset(
                             height: 50,
                             "asset/image/icon/light.png",
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => PurchasedDecoDialog(
+                                  onItemSelected: showSelectedImage),
+                            );
+                          },
+                          child: Image.asset(
+                            height: 50,
+                            "asset/image/icon/bt.png",
                             fit: BoxFit.contain,
                           ),
                         ),
