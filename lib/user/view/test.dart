@@ -1,3 +1,4 @@
+import 'package:capstone/component/maindialog.dart';
 import 'package:capstone/component/top_button.dart';
 import 'package:capstone/component/top_button_main.dart';
 import 'package:capstone/const/color.dart';
@@ -57,6 +58,11 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
       });
     }
   }
+  void showSelectedImage(String ip) {
+    setState(() {
+      imagePath = ip;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +71,9 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
       body: Center(
         child: Consumer<NFCProvider>(
           builder: (context, nfcProvider, _) {
-            final _timerProvider = Provider.of<TimerProvider>(context, listen: false);
-            if(nfcProvider.isNFCDetected) {
+            final _timerProvider =
+                Provider.of<TimerProvider>(context, listen: false);
+            if (nfcProvider.isNFCDetected) {
               if (candetect) {
                 candetect = false;
                 imagePath = 'asset/image/plants/a3.png';
@@ -92,12 +99,21 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
                       animation: _controller,
                       builder: (BuildContext context, Widget? child) {
                         return Center(
-                          child: Container(
-                            width: _animation.value,
-                            height: _animation.value,
-                            child: Image.asset(
-                              imagePath,
-                              fit: BoxFit.cover,
+                          child: GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => PurchasedItemsDialog(
+                                    onItemSelected: showSelectedImage),
+                              );
+                            },
+                            child: Container(
+                              width: _animation.value,
+                              height: _animation.value,
+                              child: Image.asset(
+                                imagePath,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         );
@@ -116,20 +132,22 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
                         return Container(
                           child: Text(
                             timerProvider.formattedTime,
-                            style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 48, fontWeight: FontWeight.bold),
                           ),
                         );
                       },
                     ),
-                    SizedBox(height: 30,),
+                    SizedBox(
+                      height: 30,
+                    ),
                     if (stopButtonVisible)
                       ElevatedButton(
-                        style:  ElevatedButton.styleFrom(
-                          foregroundColor: BODY_TEXT_COLOR,
-                          backgroundColor: primaryColor,
-                          minimumSize: Size(MediaQuery.of(context).size.width * 0.6, 50)
-
-                        ),
+                        style: ElevatedButton.styleFrom(
+                            foregroundColor: BODY_TEXT_COLOR,
+                            backgroundColor: primaryColor,
+                            minimumSize: Size(
+                                MediaQuery.of(context).size.width * 0.6, 50)),
                         onPressed: toggleStopButton,
                         child: Text("Stop"),
                       ),

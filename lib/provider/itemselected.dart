@@ -13,7 +13,6 @@ class Item with ChangeNotifier{
   void additem(String name) {
     buyitemname.add(name);
     notifyListeners();
-
   }
 
 }
