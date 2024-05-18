@@ -1,3 +1,5 @@
+import 'package:capstone/component/list_deco.dart';
+import 'package:capstone/component/pd_deco.dart';
 import 'package:flutter/material.dart';
 import 'package:capstone/const/color.dart';
 import 'package:capstone/component/top_button.dart';
@@ -11,45 +13,7 @@ class OrnamentPage extends StatefulWidget {
 }
 
 class _OrnamentPageState extends State<OrnamentPage> {
-  final List<Map<String, dynamic>> plantInfoList = [
-    {
-      'imagePath': 'asset/image/ornament.png',
-      'imageName': '장식 1',
-      'imageExplain': '설명',
-
-    },
-    {
-      'imagePath': 'asset/image/ornament.png',
-      'imageName': '장식 2',
-      'imageExplain': '설명',
-    },
-    {
-      'imagePath': 'asset/image/ornament.png',
-      'imageName': '장식 2',
-      'imageExplain': '설명',
-    },
-    {
-      'imagePath': 'asset/image/ornament.png',
-      'imageName': '장식 2',
-      'imageExplain': '설명',
-    },
-    {
-      'imagePath': 'asset/image/ornament.png',
-      'imageName': '장식 2',
-      'imageExplain': '설명',
-    },
-    {
-      'imagePath': 'asset/image/ornament.png',
-      'imageName': '장식 2',
-      'imageExplain': '설명',
-    },
-
-    {
-      'imagePath': 'asset/image/ornament.png',
-      'imageName': '장식 2',
-      'imageExplain': '설명',
-    },
-  ];
+  List<Map<String, dynamic>> decoInfoList = generateDecoInfoList();
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +28,7 @@ class _OrnamentPageState extends State<OrnamentPage> {
             child: Padding(
               padding: const EdgeInsets.only(left: 20, top: 10),
               child: Text(
-                "식물 상점",
+                "장식상점",
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: fontColor,
@@ -77,19 +41,18 @@ class _OrnamentPageState extends State<OrnamentPage> {
           SizedBox(height: 20),
           Expanded(
             child: ListView.builder(
-              itemCount: plantInfoList.length,
+              itemCount: decoInfoList.length,
               itemBuilder: (context, index) {
-                final Map<String, dynamic> plantInfo = plantInfoList[index];
+                final Map<String, dynamic> decoInfo = decoInfoList[index];
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Pdbutton(
-                      imagePath: plantInfo['imagePath'],
-                      imageName: plantInfo['imageName'],
-                      // imageExplain: plantInfo['imageExplain'],
-                      price: 100, index: index,
-                      // pagePath: (OrnamentPage()),
+                    child: PdDecobutton(
+                      index: index,
+                      imagePath: decoInfo['imagePath'],
+                      imageName: decoInfo['imageName'],
+                      price: decoInfo['price'],
                     ),
                   ),
                 );

@@ -1,7 +1,10 @@
+import 'package:capstone/component/list_deco.dart';
+import 'package:capstone/component/list_light.dart';
+import 'package:capstone/component/pd_deco.dart';
+import 'package:capstone/component/pd_light.dart';
 import 'package:flutter/material.dart';
 import 'package:capstone/const/color.dart';
 import 'package:capstone/component/top_button.dart';
-import '../../component/product_button.dart';
 
 class LightPage extends StatefulWidget {
   const LightPage({Key? key}) : super(key: key);
@@ -11,38 +14,7 @@ class LightPage extends StatefulWidget {
 }
 
 class _LightPageState extends State<LightPage> {
-  final List<Map<String, dynamic>> plantInfoList = [
-    {
-      'imagePath': 'asset/image/light.png',
-      'imageName': '조명 1',
-      'imageExplain': '설명',
-    },
-    {
-      'imagePath': 'asset/image/light.png',
-      'imageName': '조명 1',
-      'imageExplain': '설명',
-    },
-    {
-      'imagePath': 'asset/image/light.png',
-      'imageName': '조명 1',
-      'imageExplain': '설명',
-    },
-    {
-      'imagePath': 'asset/image/light.png',
-      'imageName': '조명 1',
-      'imageExplain': '설명',
-    },
-    {
-      'imagePath': 'asset/image/light.png',
-      'imageName': '조명 1',
-      'imageExplain': '설명',
-    },
-    {
-      'imagePath': 'asset/image/light.png',
-      'imageName': '조명 1',
-      'imageExplain': '설명',
-    },
-  ];
+  List<Map<String, dynamic>> lightInfoList = generateLightInfoList();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +29,7 @@ class _LightPageState extends State<LightPage> {
             child: Padding(
               padding: const EdgeInsets.only(left: 20, top: 10),
               child: Text(
-                "식물 상점",
+                "조명상점",
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: fontColor,
@@ -70,19 +42,18 @@ class _LightPageState extends State<LightPage> {
           SizedBox(height: 20),
           Expanded(
             child: ListView.builder(
-              itemCount: plantInfoList.length,
+              itemCount: lightInfoList.length,
               itemBuilder: (context, index) {
-                final Map<String, dynamic> plantInfo = plantInfoList[index];
+                final Map<String, dynamic> lightInfo = lightInfoList[index];
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Pdbutton(
-                      imagePath: plantInfo['imagePath'],
-                      imageName: plantInfo['imageName'],
-                      // imageExplain: plantInfo['imageExplain'],
-                      price: 100, index: index,
-                      // pagePath: (LightPage()),
+                    child: PdLightbutton(
+                      index: index,
+                      imagePath: lightInfo['imagePath'],
+                      imageName: lightInfo['imageName'],
+                      price: lightInfo['price'],
                     ),
                   ),
                 );
