@@ -2,6 +2,8 @@ import 'package:capstone/provider/purchase_light.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../const/color.dart';
+
 class PurchasedLightDialog extends StatelessWidget {
   final Function(String) onItemSelected;
 
@@ -14,7 +16,7 @@ class PurchasedLightDialog extends StatelessWidget {
 
     return Dialog(
       elevation: 10.0,
-      backgroundColor: Colors.white,
+      backgroundColor: buttonColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(32)),
       ),
@@ -26,7 +28,7 @@ class PurchasedLightDialog extends StatelessWidget {
           child: purchasedLight.isEmpty
               ? Center(
             child: Text(
-              '구매한 조명아이템이 없습니다.',
+              '구매한 조명 아이템이 없습니다.',
               style: TextStyle(fontSize: 18, color: Colors.grey),
               textAlign: TextAlign.center,
             ),

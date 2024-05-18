@@ -68,7 +68,7 @@ class _ShopState extends State<Shop> {
                           MaterialPageRoute(builder: (context) => OrnamentPage()),
                         );
                       },
-                      child: Imgbutton(imagePath: 'asset/image/ornament.png', imageName: '장식', pagePath: OrnamentPage()),
+                      child: Imgbutton(imagePath: 'asset/image/de1.png', imageName: '장식', pagePath: OrnamentPage()),
                     ),
                   ),
                   SizedBox(

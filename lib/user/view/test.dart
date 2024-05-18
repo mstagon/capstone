@@ -1,3 +1,4 @@
+import 'package:capstone/component/dialogdeco.dart';
 import 'package:capstone/component/maindeco.dart';
 import 'package:capstone/component/maindialog.dart';
 import 'package:capstone/component/mainlight.dart';
@@ -25,12 +26,14 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
   late Animation<double> _animation;
   String defaultimagePath = 'asset/image/plants/default.png';
   String displayimagepath = "asset/image/plants/a1.png";
+  late String decoimagepath;
   String imagepath = "";
   int _plantsindex = 1;
   String tx = "식물이 자고 있습니다. \n 테리리움에 핸드폰을 \n넣어 식물을 깨워주세요.";
   bool isVisible = false;
   bool stopButtonVisible = false;
   bool candetect = true;
+  bool isselected = false;
 
   @override
   void initState() {
@@ -69,6 +72,13 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
     displayimagepath = ip.substring(0, ip.length - 5);
   }
 
+  void showDecoSelectedImage(String ip) {
+    isselected = true;
+    decoimagepath = ip.substring(0, ip.length - 5);
+  }
+  void changecolor(String cl) {
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,9 +91,10 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
             if (nfcProvider.isNFCDetected) {
               if (candetect) {
                 candetect = false;
-                imagepath = displayimagepath + "$_plantsindex" + ",png";
+                imagepath = displayimagepath + "$_plantsindex" + ".png";
                 tx = "성장중 . . .";
                 isVisible = true;
+                print(imagepath);
                 if (!_timerProvider.isRunning) {
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     _timerProvider.startTimer();
@@ -125,7 +136,7 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
                         );
                       },
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 30),
                     Container(
                       child: Text(
                         tx,
@@ -188,7 +199,7 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
                               showDialog(
                                 context: context,
                                 builder: (context) => PurchasedLightDialog(
-                                    onItemSelected: showSelectedImage),
+                                    onItemSelected: changecolor),
                               );
                           },
                           child: Image.asset(
@@ -205,7 +216,7 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
                             showDialog(
                               context: context,
                               builder: (context) => PurchasedDecoDialog(
-                                  onItemSelected: showSelectedImage),
+                                  onItemSelected: showDecoSelectedImage),
                             );
                           },
                           child: Image.asset(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../const/color.dart';
 import '../provider/purchase_provider.dart';
 
 
@@ -15,7 +16,7 @@ class PurchasedItemsDialog extends StatelessWidget {
 
     return Dialog(
       elevation: 10.0,
-      backgroundColor: Colors.white,
+      backgroundColor: buttonColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(32)),
       ),
@@ -27,7 +28,7 @@ class PurchasedItemsDialog extends StatelessWidget {
           child: purchasedItems.isEmpty
               ? Center(
             child: Text(
-              '구매한 아이템이 없습니다.',
+              '구매한 식물 아이템이 없습니다.',
               style: TextStyle(fontSize: 18, color: Colors.grey),
               textAlign: TextAlign.center,
             ),

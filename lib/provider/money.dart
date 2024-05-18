@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Money with ChangeNotifier{
-   int usermoney = 1000;
+   int usermoney = 99999;
 
    void increase(int money){
       usermoney += money;

@@ -45,6 +45,7 @@ class PdDecobutton extends StatelessWidget {
                 imagePath,
                 fit: BoxFit.contain,
                 height: 80,
+                width: 100,
               ),
             ),
           ),
