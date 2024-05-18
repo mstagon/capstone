@@ -54,7 +54,7 @@ Future<void> main() async {
                 backgroundColor: backgroundColor,
               )
           ),
-          home : Test(),
+          home : IntroductionAnimationScreen(),
         ),
       ),
   );

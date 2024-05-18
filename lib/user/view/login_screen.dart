@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:capstone/user/view/test.dart';
 import 'package:flutter/material.dart';
 import 'package:capstone/const/color.dart';
 import 'package:capstone/const/data.dart';
@@ -81,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       await storage.write(key:ACCESS_TOKEN_KEY, value:token);
 
                       Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_) => Rootscreen())
+                          MaterialPageRoute(builder: (_) => Test())
                       );
                     },
                     style:  ElevatedButton.styleFrom(

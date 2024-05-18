@@ -2,6 +2,8 @@ import 'package:capstone/provider/purchase_deco.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../const/color.dart';
+
 
 class PurchasedDecoDialog extends StatelessWidget {
   final Function(String) onItemSelected;
@@ -15,7 +17,7 @@ class PurchasedDecoDialog extends StatelessWidget {
 
     return Dialog(
       elevation: 10.0,
-      backgroundColor: Colors.white,
+      backgroundColor: buttonColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(32)),
       ),
@@ -27,7 +29,7 @@ class PurchasedDecoDialog extends StatelessWidget {
           child: purchasedDeco.isEmpty
               ? Center(
             child: Text(
-              '구매한 아이템이 없습니다.',
+              '구매한 장식 아이템이 없습니다.',
               style: TextStyle(fontSize: 18, color: Colors.grey),
               textAlign: TextAlign.center,
             ),
