@@ -20,7 +20,10 @@ class Test extends StatefulWidget {
 class _TestState extends State<Test> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
-  String imagePath = 'asset/image/plants/default.png';
+  String defaultimagePath = 'asset/image/plants/default.png';
+  String displayimagepath = "asset/image/plants/a1.png";
+  String imagepath = "";
+  int _plantsindex = 1;
   String tx = "식물이 자고 있습니다. \n 테리리움에 핸드폰을 \n넣어 식물을 깨워주세요.";
   bool isVisible = false;
   bool stopButtonVisible = false;
@@ -52,16 +55,15 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
       final _timerProvider = Provider.of<TimerProvider>(context, listen: false);
       _timerProvider.stopTimer();
       setState(() {
-        imagePath = 'asset/image/plants/default.png';
+        defaultimagePath = 'asset/image/plants/default.png';
         tx = "식물이 자고 있습니다. \n 테리리움에 핸드폰을 \n넣어 식물을 깨워주세요.";
         isVisible = false;
       });
     }
   }
+
   void showSelectedImage(String ip) {
-    setState(() {
-      imagePath = ip;
-    });
+    displayimagepath = ip.substring(0, ip.length - 5);
   }
 
   @override
@@ -76,7 +78,7 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
             if (nfcProvider.isNFCDetected) {
               if (candetect) {
                 candetect = false;
-                imagePath = 'asset/image/plants/a3.png';
+                imagepath = displayimagepath + "$_plantsindex" + ",png";
                 tx = "성장중 . . .";
                 isVisible = true;
                 if (!_timerProvider.isRunning) {
@@ -111,7 +113,8 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin {
                               width: _animation.value,
                               height: _animation.value,
                               child: Image.asset(
-                                imagePath,
+                                isVisible
+                                    ? imagepath : defaultimagePath,
                                 fit: BoxFit.cover,
                               ),
                             ),
