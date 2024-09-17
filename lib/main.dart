@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:battery_plus/battery_plus.dart';
 import 'package:capstone/provider/battery.dart';
-import 'package:capstone/provider/ble.dart';
 import 'package:capstone/provider/money.dart';
 import 'package:capstone/provider/nfc.dart';
 import 'package:capstone/provider/purchase_deco.dart';
